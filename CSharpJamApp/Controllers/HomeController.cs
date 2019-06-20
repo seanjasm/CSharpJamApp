@@ -75,7 +75,6 @@ namespace CSharpJamApp.Controllers
 
         [Authorize]
         public ActionResult AddPlayer(string playerId)
-
         {
             AspNetUser currentUser = ORM.AspNetUsers.Single(user => user.Email == User.Identity.Name);
             Team currentUserTeam = CSharpDbDAL.GetTeam(currentUser.Id);
@@ -139,90 +138,22 @@ namespace CSharpJamApp.Controllers
         }
 
         [Authorize]
-        public ActionResult FindPlayer(string playerId)
+        public ActionResult FindPlayer(string name)
         {
+            JObject playerData = CsharpJamApi.GetSportSearchName(name);
 
+            if (playerData.Count > 0)
             {
-                AspNetUser currentUser = ORM.AspNetUsers.Single(user => user.Email == User.Identity.Name);
-                Team currentUserTeam = CSharpDbDAL.GetTeam(currentUser.Id);
+                List<UserPlayer> players = new List<UserPlayer>();
 
-                if (currentUserTeam.Players.Count >= 5)
+                foreach (JObject player in playerData["player"])
                 {
-                    return RedirectToAction("Search");
+                    players.Add(new UserPlayer(player));
                 }
-
-                Player alreadyExistingPlayer = currentUserTeam.Players.SingleOrDefault(p => p.Id == playerId);
-
-                if (alreadyExistingPlayer != null)
-                {
-                    return RedirectToAction("Search");
-                }
-
-                JObject data = CsharpJamApi.GetSportPlayerId(playerId);
-                JArray playerDataArray = (JArray)data["players"];
-                JObject playerData = (JObject)playerDataArray[0];
-                UserPlayer userPlayer = new UserPlayer(playerData)
-                {
-                    Team = currentUserTeam
-                };
-
-                Player player = new Player()
-                {
-                    Id = userPlayer.Id,
-                    TeamId = userPlayer.TeamId,
-                    Name = userPlayer.Name,
-                    Skill = userPlayer.Skill,
-                    Agility = userPlayer.Agility,
-                    Strength = userPlayer.Strength,
-                    Endurance = userPlayer.Endurance,
-                    Aggression = userPlayer.Aggression,
-                    Humor = userPlayer.Humor,
-                    TeamWork = userPlayer.TeamWork,
-                    Rating = userPlayer.Rating,
-                    Height = userPlayer.Height,
-                    Weight = userPlayer.Weight,
-                    Description = userPlayer.Description,
-                    PictureUrl = userPlayer.PictureUrl,
-                    Team = userPlayer.Team
-                };
-
-                CSharpDbDAL.AddPlayers(player);
-
-                return RedirectToAction("Search");
+                return View(players);
             }
+            return RedirectToAction("Search");
         }
-
-        //[Authorize]
-        //public ActionResult RemovePlayer(string playerId)
-        //{
-        //    Player player = CSharpDbDAL.GetPlayer(playerId);
-
-        //    if (player != null)
-        //    {
-        //        CSharpDbDAL.DeletePlayer(player);
-        //    }
-
-        //    return RedirectToAction("Search");
-        //}
-
-        //[Authorize]
-        //public ActionResult FindPlayer(string name)
-        //{
-
-        //    JObject playerData = CsharpJamApi.GetSportSearchName(name);
-
-        //    if (playerData.Count > 0)
-        //    {
-        //        List<UserPlayer> players = new List<UserPlayer>();
-
-        //        foreach (JObject player in playerData["player"])
-        //        {
-        //            players.Add(new UserPlayer(player));
-        //        }
-        //        return View(players);
-        //    }
-        //    return RedirectToAction("Search");
-        //}
 
         [Authorize]
         public ActionResult FindTeam(string teamName)
@@ -271,17 +202,6 @@ namespace CSharpJamApp.Controllers
         [HttpGet]
         public ActionResult AddTeam()
         {
-
-
-            if(Session["CurrentUser"] is null)
-            {
-                Session["CurrentUser"] = CSharpDbDAL.GetContextUser(User.Identity.Name);
-            }
-            AspNetUser user = (AspNetUser)Session["CurrentUser"];
-
-            ViewBag.MyTeam = CSharpDbDAL.GetMyTeamAsSelectedListItem(user.Id);
-
-
             return View();
         }
 
@@ -305,7 +225,7 @@ namespace CSharpJamApp.Controllers
 
         public ActionResult AddFavorite(string PlayerId)
         {
-           
+
             return RedirectToAction("Sports");
         }
 
