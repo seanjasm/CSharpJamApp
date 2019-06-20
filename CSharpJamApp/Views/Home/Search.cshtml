@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CSharpJamApp.Models.Player>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<h2>@ViewBag.Title</h2>
+<div class="container-fluid">
+    <div id="searchBar" class="col-md-4">
+        <form action="../Home/FindPlayer" method="post">
+            <label for="Name">Name</label><br />
+            <input type="text" name="name" placeholder="Name" />
+            <br />
+            <label for="SearchPlayer"></label><br />
+            <input type="submit" value="Search Player" />
+
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <form action="../Home/FindTeam" method="post">
+            <label for="TeamName">Team Name</label><br />
+            <input type="text" name="teamName" placeholder="Team Name " />
+            <br />
+            <input type="submit" id="btnGetTeam" value="Search Team" />
+            <br />
+        </form>
+    </div>
+
+    <table class="table" style="float: left;">
+        <tr>
+            <th>
+                Picture
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.PictureUrl" style="width: 150px; height: auto;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    <a href="../Home/RemovePlayer/?playerId=@item.Id" class="btn btn-info" role="button">Remove Player</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <script>
+        $(document).ready(() => {
+
+            $("").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    url: '../Home/FindTeam',
+                    data: "{'teamName':'" + $('#txtTeam').val() + "'}",
+                    async: false,
+                    success: function (data) {
+                        alert(data.d[0]);
+                        DisplayTeam(data.d[0]);
+                    },
+                    error: function () {
+                        console.log('there is some error');
+                    }
+                });
+
+            });
+
+
+            function DisplayTeam(teams) {
+                $("#result").html(teams);
+
+                for (var i in teams) {
+                    alert(teams[i]);
+                }
+
+                /*
+                $(teams).each(function (team) {
+                    $("#result").append(
+                        "<div> <h3>" + team.Name + "</h3>" +
+                        team.description + "<input type='button' value='Get Players'></div>"
+                    ); */
+                // });
+            }
+
+        });
+    </script>
+</div>

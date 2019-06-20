@@ -1,0 +1,107 @@
+﻿@model IEnumerable<CSharpJamApp.Models.UserPlayer>
+
+@{
+    ViewBag.Title = "FindPlayersByTeam";
+}
+
+<h2>Team Setup</h2>
+<style>
+    img {
+        width: 50px;
+    }
+</style>
+<div class="row">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Team</label>
+        <div class="col-md-10">
+            @Html.DropDownList("teamName", new SelectList(ViewBag.team,"value","Text"))
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Skill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agility)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Strength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aggression)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Humor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.PictureUrl" alt="Pic" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Strength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aggression)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Humor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                <a href="#" class="btn btn-info">Claim Player</a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,16 @@
+﻿@model CSharpJamApp.Models.BattleResult
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<h2>@ViewBag.Title</h2>
+<div class="container-fluid">
+    @if (Model == null || Model.Result == null)
+    {
+        <form action="../Home/Simulate" method="post">
+            <input type="submit" value="Battle!" />
+        </form>
+    }
+    else
+    {
+        <h1>@Model.Result</h1>
+    }
+</div>
