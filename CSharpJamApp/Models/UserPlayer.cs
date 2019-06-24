@@ -1,10 +1,17 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace CSharpJamApp.Models
 {
-    public class UserPlayer : Player
+    public sealed class UserPlayer : Player, IAttack
     {
+        public int Health { get;  set; }
+        public float Damage { get;  set; }
+        public bool Injured { get;  set; }
+
+
+        public UserPlayer() { }
+
         public UserPlayer(JObject player)
         {
             try
@@ -55,5 +62,46 @@ namespace CSharpJamApp.Models
             }
         }
 
+
+        private int GetRandomProbability(int min, int max)
+        {
+            return new Random().Next(min, max) + 1;
+        }
+
+        public double Attack(UserPlayer player)
+        {
+
+            return 0;
+        }
+
+        public double Defend(UserPlayer player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double HitProbability(UserPlayer player)
+        {
+            Health = 100;
+            Injured = false;
+            int remainingHealth = 100 - Health;
+
+            //double hp =  Agility * Strength * TeamWork + Humor /(Weight * Math.Log(Aggression) * Aggression);
+            double hp = (97 * 98 * Math.Log(98) * 98 + Math.Sqrt(20) )/ (67 * Math.Log10(98));
+            if (this.Injured)
+            {
+                hp /= (GetRandomProbability(remainingHealth, 120)); // GetRandomProbability(1, 100);
+            }
+            else
+            {
+                hp /= (GetRandomProbability((remainingHealth < 50 ? remainingHealth  : 50), 50));//GetRandomProbability(1, 50);
+            }
+
+            return hp;
+        }
+
+        public double MissedProbability(UserPlayer player)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
