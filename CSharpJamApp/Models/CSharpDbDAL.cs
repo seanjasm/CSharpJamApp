@@ -105,6 +105,84 @@ namespace CSharpJamApp.Models
             ORM.SaveChanges();
         }
 
+        ////public static double GetPlayerStrength(Player player)
+        ////{
+
+        ////    List<Player> players = new List<Player>();
+        ////    Player originalstrength = ORM.Players.Find(player.Strength);
+
+        ////    Player originalWeight = ORM.Players.Find(player.Weight);
+        ////    Player originalHeight = ORM.Players.Find(player.Height);
+
+        ////    Random random = new Random();
+        ////    random.Next(1,10);
+
+        ////    if (originalstrength  )
+        ////    {
+
+        //////    }
+        //public static float GetPlayerStrength(float Weight, float Height)
+        //{  
+        //    nWeight float;
+        //    BMI float;
+        //    nHeight float;
+        //    nWeight = Weight / 100;
+        //    nHeight = Height / 2.34;
+
+        //    BMI = Weight / (Height * Height);
+
+        //    if(BMI<18.5)
+        //    {
+        //        strength = nHeight * nWeight * BMI;
+        //    }
+        //    if (BMI >=18.5 && BMI <= 24.9)
+        //    {
+        //        strength = (nHeight * nWeight)/ BMI;
+        //    }
+        //    if (BMI >= 25 && BMI <= 29.9)
+        //    {
+        //        strength = (nHeight /( nWeight* BMI);
+        //    }
+        //    if (BMI > 30)
+        //    {
+        //        strength = (nHeight / (nWeight * BMI);
+        //    }
+
+        //}
+        //public static float GetPlayerAgility(float Weight, float Height)
+        //{
+        //    nWeight float;
+        //    BMI float;
+        //    nHeight float;
+        //    nWeight = Weight / 100;
+        //    nHeight = Height / 2.34;
+
+        //    BMI = Weight / (Height * Height);
+
+        //    if (BMI < 18.5)
+        //    {
+        //        Agility = BMI / (nWeight * nHeight);
+        //    }
+        //    if (BMI >= 18.5 && BMI <= 24.9)
+        //    {
+        //        Agility = 1/(nHeight * nWeight* BMI);
+        //    }
+        //    if (BMI >= 25 && BMI <= 29.9)
+        //    {
+        //        Agility = 1 / (nHeight * nWeight * BMI); ;
+        //    }
+        //    if (BMI > 30)
+        //    {
+        //        Agility = nHeight/ ( nWeight * BMI); ;
+        //    }
+
+        //}
+
+
+
+
+
+
         public static void UpdatePlayer(Player updatedPlayer)
         {
             Player originalTeam = ORM.Players.Find(updatedPlayer.Id);
@@ -163,5 +241,6 @@ namespace CSharpJamApp.Models
 
             //}
         }
+     
     }
 }
