@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace CSharpJamApp.Models
@@ -61,6 +61,7 @@ namespace CSharpJamApp.Models
                 Console.WriteLine(e);
             }
         }
+
 
         private int GetRandomProbability(int min, int max)
         {
