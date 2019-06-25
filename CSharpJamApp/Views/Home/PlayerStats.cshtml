@@ -6,6 +6,7 @@
 
         .slidecontainer {
             width: 100%;
+            
         }
 
         .slider {
@@ -15,7 +16,7 @@
             border-radius: 5px;
             background: #d3d3d3;
             outline: none;
-            -webkit-transition: .2s;
+           -webkit-transition: .2s;
             transition: opacity .2s;
         }
 
@@ -80,6 +81,7 @@
                 @Html.LabelFor(model => model.Agility, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="slidecontainer">
+                        
                         <input type="range" min="1" max="100" name="Agility" value="@Model.Agility" class="slider" id="r-Agility">
                     </div>
                     @Html.ValidationMessageFor(model => model.Agility, "", new { @class = "text-danger" })
@@ -101,6 +103,7 @@
                 @Html.LabelFor(model => model.Endurance, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="slidecontainer">
+                        
                         <input type="range" min="1" max="100" name="Endurance" value="@Model.Endurance" class="slider" id="r-Endurance">
                     </div>
                     @Html.ValidationMessageFor(model => model.Endurance, "", new { @class = "text-danger" })
@@ -111,6 +114,7 @@
                 @Html.LabelFor(model => model.Aggression, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="slidecontainer">
+                        
                         <input type="range" min="1" max="100" name="Aggression" value="@Model.Aggression" class="slider" id="r-Aggression">
                     </div>
                     @Html.ValidationMessageFor(model => model.Aggression, "", new { @class = "text-danger" })
@@ -121,6 +125,7 @@
                 @Html.LabelFor(model => model.Humor, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="slidecontainer">
+                       
                         <input type="range" min="1" max="100" name="Humor" value="@Model.Humor" class="slider" id="r-Humor">
                     </div>
                     @Html.ValidationMessageFor(model => model.Humor, "", new { @class = "text-danger" })
@@ -131,6 +136,7 @@
                 @Html.LabelFor(model => model.TeamWork, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="slidecontainer">
+                       
                         <input type="range" min="1" max="100" name="TeamWork" value="@Model.TeamWork" class="slider" id="r-TeamWork">
                     </div>
                     @Html.ValidationMessageFor(model => model.TeamWork, "", new { @class = "text-danger" })
