@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace CSharpJamApp.Models
@@ -66,6 +66,10 @@ namespace CSharpJamApp.Models
         }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19c4102fc3482f141a6b34088b87ef25c6d04fcd
         private int GetRandomProbability(int min, int max)
         {
             return new Random().Next(min, max) + 1;
@@ -142,5 +146,9 @@ namespace CSharpJamApp.Models
 
             return (float)Agility * 100;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19c4102fc3482f141a6b34088b87ef25c6d04fcd
     }
 }
