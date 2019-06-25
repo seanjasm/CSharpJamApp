@@ -11,7 +11,8 @@ namespace CSharpJamApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Player
     {
         public string Id { get; set; }
@@ -25,7 +26,11 @@ namespace CSharpJamApp.Models
         public double Humor { get; set; }
         public double TeamWork { get; set; }
         public double Rating { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N1}")]
         public double Height { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N1}")]
         public double Weight { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
