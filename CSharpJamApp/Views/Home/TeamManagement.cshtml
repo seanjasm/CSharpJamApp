@@ -2,95 +2,97 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 
 <h2>@ViewBag.Title</h2>
-<div class="container-fluid">
-    <div id="searchBar" class="col-md-4">
-        <form action="../Home/FindPlayer" method="post">
-            <label for="Name">Name</label><br />
-            <input type="text" name="name" placeholder="Name" />
-            <br />
-            <label for="SearchPlayer"></label>
-            <br />
-            <input type="submit" value="Search Player" />
-            <br />
-        </form>
+<body style="background-color:blanchedalmond">
+    <div class="container-fluid">
+        <div id="searchBar" class="col-md-4">
+            <form action="../Home/FindPlayer" method="post">
+                <label for="Name">Name</label><br />
+                <input type="text" name="name" placeholder="Name" />
+                <br />
+                <label for="SearchPlayer"></label>
+                <br />
+                <input type="submit" value="Search Player" />
+                <br />
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form action="../Home/FindTeam" method="post">
+                <label for="TeamName">Team Name</label>
+                <br />
+                <input type="text" name="teamName" placeholder="Team Name " />
+                <br />
+                <label for="SearchTeam"></label><br />
+                <input type="submit" id="btnGetTeam" value="Search Team" />
+                <br />
+            </form>
+        </div>
+
     </div>
 
-    <div class="col-md-4">
-        <form action="../Home/FindTeam" method="post">
-            <label for="TeamName">Team Name</label>
-            <br />
-            <input type="text" name="teamName" placeholder="Team Name " />
-            <br />
-            <label for="SearchTeam"></label><br />
-            <input type="submit" id="btnGetTeam" value="Search Team" />
-            <br />
-        </form>
-    </div>
-            
-</div>
+    <div class="container" style="margin-top: 20px;">
 
-<div class="container" style="margin-top: 20px;">
+        <h2 class="text-danger">@TempData["Message"]</h2>
 
-    <h2 class="text-danger">@TempData["Message"]</h2>
-
-    @if (@Model == null)
-    {
-        <a href="../Home/AddTeam" class="jumbotron btn btn-info">Add Your Team</a>
-    }
-    else
-    {
-    <table class="table" style="float: left;">
-        <tr>
-            <th>
-            </th>
-            <th>
-                @Html.DisplayName("Name")
-            </th>
-            <th>
-                @Html.DisplayName("Rating")
-            </th>
-            <th>
-                @Html.DisplayName("Height")
-            </th>
-            <th>
-                @Html.DisplayName("Weight")
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.Players)
+        @if (@Model == null)
         {
-        <tr>
-            <td>
-                <a href="../Home/PlayerStats?playerId=@item.Id">
-                    <img src="@item.PictureUrl" style="width: 150px; height: auto;" alt="Pic of @item.Name"/>
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                <a href="../Home/PlayerStats?playerId=@item.Id" class="btn btn-info" role="button">Stats</a>
-            </td>
-            <td>
-                <a href="../Home/RemovePlayer/?playerId=@item.Id" class="btn btn-info" role="button">Remove Player</a>
-            </td>
-        </tr>
+            <a href="../Home/AddTeam" class="jumbotron btn btn-info">Add Your Team</a>
         }
+        else
+        {
+            <table class="table" style="float: left;">
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Rating")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Height")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Weight")
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
 
-    </table>
-    }
-</div>
+                @foreach (var item in Model.Players)
+                {
+                    <tr>
+                        <td>
+                            <a href="../Home/PlayerStats?playerId=@item.Id">
+                                <img src="@item.PictureUrl" style="width: 150px; height: auto;" alt="Pic of @item.Name" />
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Height)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+                        <td>
+                            <a href="../Home/PlayerStats?playerId=@item.Id" class="btn btn-info" role="button">Stats</a>
+                        </td>
+                        <td>
+                            <a href="../Home/RemovePlayer/?playerId=@item.Id" class="btn btn-info" role="button">Remove Player</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</body>
             <script>
                 $(document).ready(() => {
 
