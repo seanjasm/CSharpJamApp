@@ -63,6 +63,7 @@ namespace CSharpJamApp.Models
         }
 
 
+
         private int GetRandomProbability(int min, int max)
         {
             return new Random().Next(min, max) + 1;
@@ -103,5 +104,6 @@ namespace CSharpJamApp.Models
         {
             throw new NotImplementedException();
         }
+
     }
 }
