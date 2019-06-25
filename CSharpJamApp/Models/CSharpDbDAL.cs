@@ -162,13 +162,12 @@ namespace CSharpJamApp.Models
 
         public static void UpdatePlayer(Player updatedPlayer)
         {
-            Player originalTeam = ORM.Players.Find(updatedPlayer.Id);
+            Player originalTeam = ORM.Players.FirstOrDefault(p => p.Id == updatedPlayer.Id && p.TeamId == updatedPlayer.TeamId);
+
             if (originalTeam != null)
             {
-                originalTeam.Id = updatedPlayer.Id;
 
-                originalTeam.Name = updatedPlayer.Name;
-
+                //originalTeam.Name = updatedPlayer.Name;
                 originalTeam.Strength = updatedPlayer.Strength;
                 originalTeam.Skill = updatedPlayer.Skill;
                 originalTeam.Agility = updatedPlayer.Agility;
@@ -180,10 +179,6 @@ namespace CSharpJamApp.Models
                 originalTeam.Description = updatedPlayer.Description;
                 ORM.SaveChanges();
             }
-            //else
-            //{
-
-            //}
         }
 
         public static List<Match> GetMatch()

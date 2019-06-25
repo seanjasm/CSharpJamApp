@@ -66,14 +66,22 @@ namespace CSharpJamApp.Controllers
             return View(team);
         }
 
+
         [Authorize]
         public ActionResult PlayerStats(string playerId)
         {
             AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
             Player player = CSharpDbDAL.GetUserPlayer(currentUser.Id, playerId);
 
+            return View(player);
+        }
 
-
+        [Authorize]
+        [HttpPost]
+        public ActionResult PlayerStats(Player player)
+        {
+            CSharpDbDAL.UpdatePlayer(player);
+            ViewBag.Message = $"{player.Name} updated!";
             return View(player);
         }
 
