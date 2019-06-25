@@ -67,6 +67,17 @@ namespace CSharpJamApp.Controllers
         }
 
         [Authorize]
+        public ActionResult PlayerStats(string playerId)
+        {
+            AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
+            Player player = CSharpDbDAL.GetUserPlayer(currentUser.Id, playerId);
+
+
+
+            return View(player);
+        }
+
+        [Authorize]
         public ActionResult AddPlayer(string playerId)
         {
             AspNetUser currentUser = ORM.AspNetUsers.Single(user => user.Email == User.Identity.Name);
