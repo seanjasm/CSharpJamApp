@@ -100,7 +100,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Endurance, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Endurance, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" name="Endurance" value="@Model.Endurance" class="slider" id="r-Endurance">
+                    </div>
                     @Html.ValidationMessageFor(model => model.Endurance, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -108,7 +110,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Aggression, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Aggression, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" name="Aggression" value="@Model.Aggression" class="slider" id="r-Aggression">
+                    </div>
                     @Html.ValidationMessageFor(model => model.Aggression, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -116,7 +120,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Humor, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Humor, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" name="Humor" value="@Model.Humor" class="slider" id="r-Humor">
+                    </div>
                     @Html.ValidationMessageFor(model => model.Humor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -124,7 +130,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TeamWork, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TeamWork, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" name="TeamWork" value="@Model.TeamWork" class="slider" id="r-TeamWork">
+                    </div>
                     @Html.ValidationMessageFor(model => model.TeamWork, "", new { @class = "text-danger" })
                 </div>
             </div>
