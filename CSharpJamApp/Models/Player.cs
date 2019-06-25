@@ -16,7 +16,9 @@ namespace CSharpJamApp.Models
     public partial class Player
     {
         public string Id { get; set; }
+        [Display(Name = "Team Name")]
         public string TeamId { get; set; }
+        [Display(Name = "Player Name")]
         public string Name { get; set; }
         public double Skill { get; set; }
         public double Agility { get; set; }

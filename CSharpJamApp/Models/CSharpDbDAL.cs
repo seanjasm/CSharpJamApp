@@ -99,6 +99,20 @@ namespace CSharpJamApp.Models
             return ORM.Players.SingleOrDefault(player => player.Id == playerId);
         }
 
+        public static Player GetUserPlayer(string userId, string playerId)
+        {
+            try
+            {
+                return ORM.Teams.SingleOrDefault(o => o.OwnerId == userId)
+                    .Players.FirstOrDefault(p => p.Id == playerId);
+            }
+            catch(Exception)
+            {
+                
+            }
+            return null;
+        }
+
         public static List<Player> GetMyPlayers(string teamId)
         {
             return ORM.Players.Where(p => p.TeamId == teamId).ToList();                

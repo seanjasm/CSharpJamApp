@@ -65,11 +65,6 @@ namespace CSharpJamApp.Models
             }
         }
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 19c4102fc3482f141a6b34088b87ef25c6d04fcd
         private int GetRandomProbability(int min, int max)
         {
             return new Random().Next(min, max) + 1;
@@ -84,7 +79,7 @@ namespace CSharpJamApp.Models
         {
             int remainingHealth = 100 - Health;
 
-            double hp = (Agility * Skill * Math.Sqrt(Strength) * Math.Log(TeamWork) + Math.Sqrt(Humor) )/ (Agility * Math.Log10(Aggression));
+            double hp = (Agility * Rating * Math.Sqrt(Strength) * Math.Log(TeamWork) + Math.Sqrt(Humor) )/ (Agility * Math.Log10(Aggression));
 
             //Using the remaing health as the players energy
             //Enerrgy is used to determine if the player will produce maximum damage
@@ -146,9 +141,5 @@ namespace CSharpJamApp.Models
 
             return (float)Agility * 100;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 19c4102fc3482f141a6b34088b87ef25c6d04fcd
     }
 }
