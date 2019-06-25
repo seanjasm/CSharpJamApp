@@ -93,6 +93,7 @@ namespace CSharpJamApp.Controllers
 
             if (currentUserTeam.Players.Count >= 5)
             {
+                TempData["Message"] = "Only 5 players allowed.";
                 return RedirectToAction("TeamManagement");
             }
 
@@ -100,6 +101,7 @@ namespace CSharpJamApp.Controllers
 
             if (alreadyExistingPlayer != null)
             {
+                TempData["Message"] = $"{alreadyExistingPlayer.Name} already belongs to team.";
                 return RedirectToAction("TeamManagement");
             }
 
@@ -132,7 +134,7 @@ namespace CSharpJamApp.Controllers
             };
 
             CSharpDbDAL.AddPlayers(player);
-
+            TempData["Message"] = $"{player.Name} added to team.";
             return RedirectToAction("TeamManagement");
         }
 
@@ -208,12 +210,7 @@ namespace CSharpJamApp.Controllers
                 }
                 return View(players);
             }
-            //ViewBag.team = CSharpDbDAL.GetAllTeam();
-            ViewBag.team = new List<SelectListItem>{ new SelectListItem{ Value = "1",
-                Text="Anita"} };
 
-
-            // ViewBag.team = new SelectList(CSharpDbDAL.GetAllTeam(),"Name");
             return RedirectToAction("TeamManagement");
         }
 
