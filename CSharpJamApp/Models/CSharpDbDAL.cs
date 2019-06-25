@@ -173,6 +173,8 @@ namespace CSharpJamApp.Models
                 originalTeam.Agility = updatedPlayer.Agility;
                 originalTeam.Endurance = updatedPlayer.Endurance;
                 originalTeam.Humor = updatedPlayer.Humor;
+                originalTeam.Aggression = updatedPlayer.Aggression;
+                originalTeam.TeamWork = updatedPlayer.TeamWork;
                 originalTeam.Rating = updatedPlayer.Rating;
                 originalTeam.Height = updatedPlayer.Height;
                 originalTeam.Weight = updatedPlayer.Weight;
@@ -208,10 +210,6 @@ namespace CSharpJamApp.Models
                 originalmatch.Time = updatedMatch.Time;
                 originalmatch.Weather = updatedMatch.Weather;
             }
-            //else
-            //{
-
-            //}
         }
      
     }

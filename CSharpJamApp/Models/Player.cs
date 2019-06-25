@@ -29,10 +29,10 @@ namespace CSharpJamApp.Models
         public double TeamWork { get; set; }
         public double Rating { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N1}")]
+        [DisplayFormat(DataFormatString = "{0:N1}", ApplyFormatInEditMode = true)]
         public double Height { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N1}")]
+        [DisplayFormat(DataFormatString = "{0:N1}", ApplyFormatInEditMode = true)]
         public double Weight { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
