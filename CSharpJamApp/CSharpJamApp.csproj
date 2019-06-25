@@ -228,6 +228,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Back_ground_Image.jpg" />
     <Content Include="Models\CSharpJamDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CSharpJamDB.edmx</DependentUpon>
@@ -316,7 +317,6 @@
     <Content Include="Views\Home\Monstars.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Monstars.cshtml" />
-    <Content Include="Views\Home\Battle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

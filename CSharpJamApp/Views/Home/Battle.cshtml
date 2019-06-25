@@ -1,16 +1,30 @@
 ﻿@model CSharpJamApp.Models.BattleResult
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<style>
+    body {
+        margin: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.4;
+    }
+  
+</style>
 
 <h2>@ViewBag.Title</h2>
+
+<body class="homepage-header-background" style="background-image:url('/Image/Back_ground_Image.jpg')">
+
+</body>
 <div class="container-fluid">
+
     @if (Model == null || Model.Result == null)
-    {
-        <form action="../Home/Simulate" method="post">
-            <input type="submit" value="Battle!" />
-        </form>
-    }
-    else
-    {
-        <h1>@Model.Result</h1>
-    }
+        {
+    <form action="../Home/Simulate" method="post">
+        <input type="submit" value="Battle!" />
+    </form>
+        }
+        else
+        {
+    <h1>@Model.Result</h1>
+        }
 </div>
