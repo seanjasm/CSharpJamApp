@@ -42,7 +42,6 @@
     <table class="table" style="float: left;">
         <tr>
             <th>
-                Picture
             </th>
             <th>
                 @Html.DisplayName("Name")
@@ -64,7 +63,9 @@
         {
         <tr>
             <td>
-                <img src="@item.PictureUrl" style="width: 150px; height: auto;" />
+                <a href="../Home/PlayerStats?playerId=@item.Id">
+                    <img src="@item.PictureUrl" style="width: 150px; height: auto;" alt="Pic of @item.Name"/>
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
