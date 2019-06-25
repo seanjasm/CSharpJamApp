@@ -48,7 +48,8 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            <a href="AddPlayer/?playerId=@item.Id" class="btn btn-info" role="button">Claim Player</a>
+            @Html.ActionLink("Claim Player", "AddPlayer", routeValues: new { playerId = @item.Id }, htmlAttributes: new { @class="btn btn-info" })
+            
         </td>
     </tr>
         }
