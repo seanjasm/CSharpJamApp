@@ -58,19 +58,12 @@ namespace CSharpJamApp.Controllers
 
         // GET: Search
         [Authorize]
-        public ActionResult Search()
+        public ActionResult TeamManagement()
         {
-            AspNetUser currentUser = ORM.AspNetUsers.Single(user => user.Email == User.Identity.Name);
-            Team currentUserTeam = CSharpDbDAL.GetTeam(currentUser.Id);
+            AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
+            Team team = CSharpDbDAL.GetTeam(currentUser.Id);            
 
-            return View(currentUserTeam.Players);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public ActionResult Search(string player, string team)
-        {
-            return View();
+            return View(team);
         }
 
         [Authorize]
@@ -81,14 +74,14 @@ namespace CSharpJamApp.Controllers
 
             if (currentUserTeam.Players.Count >= 5)
             {
-                return RedirectToAction("Search");
+                return RedirectToAction("TeamManagement");
             }
 
             Player alreadyExistingPlayer = currentUserTeam.Players.SingleOrDefault(p => p.Id == playerId);
 
             if (alreadyExistingPlayer != null)
             {
-                return RedirectToAction("Search");
+                return RedirectToAction("TeamManagement");
             }
 
             JObject data = CsharpJamApi.GetSportPlayerId(playerId);
@@ -121,7 +114,7 @@ namespace CSharpJamApp.Controllers
 
             CSharpDbDAL.AddPlayers(player);
 
-            return RedirectToAction("Search");
+            return RedirectToAction("TeamManagement");
         }
 
         [Authorize]
@@ -134,7 +127,7 @@ namespace CSharpJamApp.Controllers
                 CSharpDbDAL.DeletePlayer(player);
             }
 
-            return RedirectToAction("Search");
+            return RedirectToAction("TeamManagement");
         }
 
         [Authorize]
@@ -152,7 +145,7 @@ namespace CSharpJamApp.Controllers
                 }
                 return View(players);
             }
-            return RedirectToAction("Search");
+            return RedirectToAction("TeamManagement");
         }
 
         [Authorize]
@@ -168,9 +161,16 @@ namespace CSharpJamApp.Controllers
                 {
                     teams.Add(new UserTeam(team));
                 }
-                return View(teams);
+                if (teams.Count > 1)
+                {
+                    return View(teams);
+                }
+                else if (teams.Count == 1)
+                {
+                    return RedirectToAction("FindPlayersByTeam", routeValues: new { teamName = teams[0].Name});
+                }
             }
-            return RedirectToAction("Search");
+            return RedirectToAction("TeamManagement");
         }
 
 
@@ -178,7 +178,6 @@ namespace CSharpJamApp.Controllers
         public ActionResult FindPlayersByTeam(string teamName)
         {
             JObject teamData = CsharpJamApi.GetSportPlayerByTeam(teamName);
-
 
             if (teamData.Count > 0)
             {
@@ -196,7 +195,7 @@ namespace CSharpJamApp.Controllers
 
 
             // ViewBag.team = new SelectList(CSharpDbDAL.GetAllTeam(),"Name");
-            return RedirectToAction("Search");
+            return RedirectToAction("TeamManagement");
         }
 
         [HttpGet]

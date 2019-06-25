@@ -9,8 +9,6 @@ namespace CSharpJamApp.Models
     public interface IAttack
     {
         double Attack(UserPlayer player);
-        double Defend(UserPlayer player);
         double HitProbability(UserPlayer player);
-        double MissedProbability(UserPlayer player);
     }
 }

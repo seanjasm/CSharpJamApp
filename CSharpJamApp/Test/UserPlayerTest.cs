@@ -6,22 +6,131 @@ namespace CSharpJamApp.Test
 {
     public class UserPlayerTest
     {
+        
         [Fact]
-        public void HitProbability()
+        public void WeakPlayer()
         {
-            double actual = new UserPlayer().HitProbability(null);
-            double expected = 1;
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Weak);           
+
+            double actual = userPlayer.HitProbability(userPlayer);
+            double expected = 20;
 
             Assert.Equal(expected, actual);
         }
 
-        //[Fact]
-        //public void RandomIs20()
-        //{
-        //    int actual = new UserPlayer().GetRandomProbability(19, 20);
-        //    int expected = 20;
+        [Fact]
+        public void StrongPlayer()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Strong);          
 
-        //    Assert.Equal(expected, actual);
-        //}
+
+            double actual = userPlayer.HitProbability(userPlayer);
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ModeratePlayer()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Moderate);
+
+
+            double actual = userPlayer.HitProbability(userPlayer);
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ModeratePlayerfDamagePercentage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Moderate);
+
+
+            double actual = userPlayer.GetDamagePercentage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void StrongPlayerfDamagePercentage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Strong);
+
+
+            double actual = userPlayer.GetDamagePercentage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void WeakPlayerfDamagePercentage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Weak);
+
+
+            double actual = userPlayer.GetDamagePercentage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+
+
+        [Fact]
+        public void WeakPlayerfDamage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Weak);
+
+
+            double actual = userPlayer.GetDamage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+
+
+        [Fact]
+        public void ModeratePlayerfDamage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Moderate);
+
+
+            double actual = userPlayer.GetDamage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+
+
+        [Fact]
+        public void StrongPlayerfDamage()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Strong);
+
+
+            double actual = userPlayer.GetDamage();
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
+
+
+        [Fact]
+        public void StrongPlayerHP()
+        {
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Strong);
+
+
+            double actual = userPlayer.HitProbability(userPlayer);
+            double expected = 20;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

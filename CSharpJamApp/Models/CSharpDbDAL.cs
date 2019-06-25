@@ -99,11 +99,52 @@ namespace CSharpJamApp.Models
             return ORM.Players.SingleOrDefault(player => player.Id == playerId);
         }
 
+        public static List<Player> GetMyPlayers(string teamId)
+        {
+            return ORM.Players.Where(p => p.TeamId == teamId).ToList();                
+        }
+
         public static void DeletePlayer(Player player)
         {
             ORM.Players.Remove(player);
             ORM.SaveChanges();
         }
+
+        //public static float GetPlayerAgility(float Weight, float Height)
+        //{  
+        //    nWeight float;
+        //    BMI float;
+        //    nHeight float;
+        //    nWeight = Weight / 100;
+        //    nHeight = Height / 2.34;
+
+        //    BMI = Weight / (Height * Height);
+
+        //    if(BMI<18.5)
+        //    {
+        //        strength = nHeight * nWeight * BMI;
+        //    }
+        //    if (BMI >=18.5 && BMI <= 24.9)
+        //    {
+        //        strength = (nHeight * nWeight)/ BMI;
+        //    }
+        //    if (BMI >= 25 && BMI <= 29.9)
+        //    {
+        //        strength = (nHeight /( nWeight* BMI);
+        //    }
+        //    if (BMI > 30)
+        //    {
+        //        strength = (nHeight / (nWeight * BMI);
+        //    }
+
+        //}
+
+       
+
+
+
+
+
 
         public static void UpdatePlayer(Player updatedPlayer)
         {
@@ -163,5 +204,6 @@ namespace CSharpJamApp.Models
 
             //}
         }
+     
     }
 }
