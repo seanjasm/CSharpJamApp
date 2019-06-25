@@ -79,6 +79,7 @@ namespace CSharpJamApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["CurrentUser"] = CSharpDbDAL.GetContextUser(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -156,7 +157,7 @@ namespace CSharpJamApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
+                    Session["CurrentUser"] = CSharpDbDAL.GetContextUser(User.Identity.Name);
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

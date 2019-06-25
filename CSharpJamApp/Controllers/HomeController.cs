@@ -16,7 +16,7 @@ namespace CSharpJamApp.Controllers
         public ActionResult Index()
         {
             // create their team
-            AspNetUser currentUser = ORM.AspNetUsers.SingleOrDefault(u => u.Email == User.Identity.Name);
+            AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
 
             if (currentUser != null)
             {
