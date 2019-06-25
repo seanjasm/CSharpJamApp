@@ -56,11 +56,11 @@
         @Html.AntiForgeryToken()
 
 
-        <div class="col-md-6" style="border: solid 1px yellow;">
+        <div class="col-md-6">
             <img src="@Model.PictureUrl" />
         </div>
 
-        <div class="form-horizontal col-md-6" style="border: solid 1px yellow;">
+        <div class="form-horizontal col-md-6">
             <h4>@Model.Name</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
