@@ -1,21 +1,21 @@
 ﻿@model CSharpJamApp.Models.BattleResult
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+
 <style>
+
     body {
         margin: 0;
         background-repeat: no-repeat;
         background-size: cover;
-        opacity: 0.4;
+        
     }
-  
 </style>
-
 <h2>@ViewBag.Title</h2>
 
 <body class="homepage-header-background" style="background-image:url('/Image/Back_ground_Image.jpg')">
 
 </body>
-<div class="container-fluid">
+<div class="container-fluid" id="Button">
 
     @if (Model == null || Model.Result == null)
         {
@@ -28,3 +28,4 @@
     <h1>@Model.Result</h1>
         }
 </div>
+
