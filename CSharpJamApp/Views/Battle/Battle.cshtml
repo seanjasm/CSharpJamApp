@@ -35,14 +35,12 @@
 <body class="homepage-header-background" style="background-image:url('/Image/Back_ground_Image.jpg')">
 
     <div class="container-fluid" id="Button">
-
-
-
+        
         <div class="col-md-3">
              
-             @foreach(CSharpJamApp.Models.UserPlayer player in @ViewBag.Monstars)
+             @foreach(CSharpJamApp.Models.UserPlayer player in (List< CSharpJamApp.Models.UserPlayer>)@TempData["Monstars"])
              {
-                  string name = player.Name + ".gif";
+                 string name = player.Name + ".gif";
                  <div class="playercard col-md-3">
                      <img src="~/MonstarImages/@name" />
                      <h4>@player.Name</h4>
@@ -52,15 +50,15 @@
         </div>
 
         <div class="col-md-6 sticky">
-
-            <form action="../Home/Simulate" method="post">
+            <p class="text-danger">@TempData["Message"]</p>
+            <form action="../Battle/Simulate" method="post">
                 <input type="submit" value="Battle!" />
             </form>
         </div>
 
         <div class="col-md-3">
             
-            @foreach (CSharpJamApp.Models.UserPlayer player in @ViewBag.MyTeam)
+            @foreach (CSharpJamApp.Models.UserPlayer player in (List<CSharpJamApp.Models.UserPlayer>)@TempData["MyTeam"])
             {
                 <div class="playercard col-md-3">
                     <img src="@player.PictureUrl" />

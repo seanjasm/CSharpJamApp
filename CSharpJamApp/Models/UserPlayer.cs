@@ -61,9 +61,13 @@ namespace CSharpJamApp.Models
                 {
                     Rating = 3.5;
                 }
+                else if(wage.Length > 5)
+                {
+                    Rating = 2;
+                }
                 else
                 {
-                    Rating = 1.5;
+                    Rating = 5;
                 }
 
                 if (float.TryParse((string)player["strHeight"], out float height))
