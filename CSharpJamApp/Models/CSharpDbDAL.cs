@@ -57,6 +57,16 @@ namespace CSharpJamApp.Models
             return ORM.Teams.FirstOrDefault(team => team.OwnerId == ownerId);
         }
 
+        public static List<UserPlayer> GetTeamAsUserPlayer(string ownerId)
+        {
+            List<UserPlayer> list = new List<UserPlayer>();
+            foreach( Player player in ORM.Teams.FirstOrDefault(team => team.OwnerId == ownerId).Players)
+            {
+                list.Add(new UserPlayer(player));
+            }
+            return list;
+        }
+
         public static void DeleteTeam(int ownerId)
         {
             Team found = ORM.Teams.Find(ownerId);
@@ -90,13 +100,36 @@ namespace CSharpJamApp.Models
 
         public static void AddPlayers(Player player)
         {
+            if(player.Rating == 5)
+            {
+                player = SetPlayerAttributes(player, PlayerFactory.GetPlayer(PlayerType.Strong));
+            }
+            else if(player.Rating > 3)
+            {
+                player = SetPlayerAttributes(player, PlayerFactory.GetPlayer(PlayerType.Moderate));
+            }
+            else
+            {
+                player = SetPlayerAttributes(player, PlayerFactory.GetPlayer(PlayerType.Weak));
+            }
+
             ORM.Players.Add(player);
             ORM.SaveChanges();
         }
 
-        public static Player GetPlayer(string playerId)
+        private static Player SetPlayerAttributes(Player player, UserPlayer userPlayer)
         {
-            return ORM.Players.SingleOrDefault(player => player.Id == playerId);
+            player.Aggression = userPlayer.Aggression;
+            player.Agility = userPlayer.Agility;
+            player.Endurance = userPlayer.Endurance;
+            player.Humor = userPlayer.Humor;
+
+            return player;
+        }
+
+        public static Player GetPlayer(string playerId, string userId)
+        {
+            return ORM.Players.SingleOrDefault(p => p.Id == playerId && p.Team.OwnerId == userId);
         }
 
         public static Player GetUserPlayer(string userId, string playerId)
