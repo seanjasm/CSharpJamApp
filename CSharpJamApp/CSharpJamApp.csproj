@@ -267,6 +267,7 @@
     <Content Include="MonstarImages\MonstarsCover.jpg" />
     <Content Include="MonstarImages\Nawt.gif" />
     <Content Include="MonstarImages\Pound.gif" />
+    <Content Include="MonstarImages\TonySeanAnita.jpg" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\CSharpjamDB.csdl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\CSharpjamDB.msl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\CSharpjamDB.ssdl" />
