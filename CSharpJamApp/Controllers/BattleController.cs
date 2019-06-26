@@ -27,10 +27,10 @@ namespace CSharpJamApp.Controllers
 
         public ActionResult Battle()
         {
-            object result = TempData["result"];
-            TempData.Remove("result");
-
-            return View(result);
+            ViewBag.Monstars = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
+            AspNetUser user = CSharpDbDAL.GetContextUser(User.Identity.Name);
+            ViewBag.MyTeam = CSharpDbDAL.GetTeamAsUserPlayer(user.Id);
+            return View();
         }
 
         public ActionResult Simulate()
@@ -72,7 +72,6 @@ namespace CSharpJamApp.Controllers
 
             List<UserPlayer> HeadToHead = new List<UserPlayer>();
 
-
             while (myTeam.Count >= 1 && monstars.Count >= 1)
             {
                 int myTeamIndex = new Random().Next(0, myTeam.Count);
@@ -84,7 +83,7 @@ namespace CSharpJamApp.Controllers
                     monstars[monstarIndex]
                 };
 
-                Battle(HeadToHead);
+                MatchUp(HeadToHead);
 
                 //If my team player has no health
                 if (HeadToHead[0].Health <= 0)
@@ -108,7 +107,7 @@ namespace CSharpJamApp.Controllers
         }
 
 
-        public void Battle(List<UserPlayer> players)
+        public void MatchUp(List<UserPlayer> players)
         {
             int whoGoesFirst = new Random().Next(0, 2);
             int whoGoesNext = whoGoesFirst > 0 ? 0 : 1;

@@ -1,0 +1,75 @@
+﻿
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<style>
+
+    body {
+        margin: 0;
+        background-repeat: no-repeat;
+        background-size: cover;        
+    }
+
+    .playercard
+    {
+        color: white;
+        clear:left;
+    }
+
+    div.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        padding: 5px;
+        background-color: #cae8ca;
+        border: 2px solid #4CAF50;
+    }
+
+    img {
+        width: 250px;
+        height: 250px;
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+
+<body class="homepage-header-background" style="background-image:url('/Image/Back_ground_Image.jpg')">
+
+    <div class="container-fluid" id="Button">
+
+
+
+        <div class="col-md-3">
+             
+             @foreach(CSharpJamApp.Models.UserPlayer player in @ViewBag.Monstars)
+             {
+                  string name = player.Name + ".gif";
+                 <div class="playercard col-md-3">
+                     <img src="~/MonstarImages/@name" />
+                     <h4>@player.Name</h4>
+                 </div>
+             }
+
+        </div>
+
+        <div class="col-md-6 sticky">
+
+            <form action="../Home/Simulate" method="post">
+                <input type="submit" value="Battle!" />
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            
+            @foreach (CSharpJamApp.Models.UserPlayer player in @ViewBag.MyTeam)
+            {
+                <div class="playercard col-md-3">
+                    <img src="@player.PictureUrl" />
+                    <h4>@player.Name</h4>
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+</body>

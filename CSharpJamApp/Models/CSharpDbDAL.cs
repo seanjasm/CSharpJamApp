@@ -118,11 +118,13 @@ namespace CSharpJamApp.Models
         }
 
         private static Player SetPlayerAttributes(Player player, UserPlayer userPlayer)
-        {
+        {   
             player.Aggression = userPlayer.Aggression;
             player.Agility = userPlayer.Agility;
             player.Endurance = userPlayer.Endurance;
             player.Humor = userPlayer.Humor;
+            player.TeamWork = userPlayer.TeamWork;
+            player.Strength = userPlayer.Strength;
 
             return player;
         }
