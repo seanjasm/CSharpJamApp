@@ -12,7 +12,29 @@ namespace CSharpJamApp.Models
 
         public UserPlayer() {
             Injured = false;
-            Health = 10;
+            Health = 100;
+        }
+
+        public UserPlayer(Player player)
+        {
+            Injured = false;
+            Health = 100;
+            this.Id = player.Id;
+            this.TeamId = player.TeamId;
+            this.Name = player.Name;
+            this.Skill = player.Skill;
+            this.Agility = player.Agility;
+            this.Strength = player.Strength;
+            this.Endurance = player.Endurance;
+            this.Aggression = player.Aggression;
+            this.Humor = player.Humor;
+            this.TeamWork = player.TeamWork;
+            this.Rating = player.Rating;
+            this.Height = player.Height;
+            this.Weight = player.Weight;
+            this.Description = player.Description;
+            this.PictureUrl = player.PictureUrl;
+            this.Team = player.Team;
         }
 
         public UserPlayer(JObject player)
@@ -72,7 +94,9 @@ namespace CSharpJamApp.Models
 
         public double Attack(UserPlayer player)
         {
-            return 0;
+            double hp = HitProbability(player);
+            double damageDone = GetDamage() * GetRandomProbability(Convert.ToInt32((hp - (hp * .25))), Convert.ToInt32(hp))/100;
+            return damageDone/100;
         }
 
         public double HitProbability(UserPlayer player)
@@ -87,13 +111,16 @@ namespace CSharpJamApp.Models
             {
                 //If player is injured the chances of getting maximum damage is reduced by 50%
                 hp /= (GetRandomProbability(remainingHealth, 120));
+                hp *= player.GetPlayerAgility();
             }
             else
             {                
                 hp /= (GetRandomProbability((remainingHealth < 50 ? remainingHealth  : 50), 50));
+                hp *= player.GetPlayerAgility();
+                hp = hp < 75 ? (double)GetRandomProbability(Convert.ToInt32(hp), 100) : hp;
             }
 
-            hp *= player.GetPlayerAgility();
+            
 
             return hp;
         }
@@ -103,9 +130,9 @@ namespace CSharpJamApp.Models
             return (Strength * Aggression) / Agility * 0.1;
         }
 
-        public int GetDamage()
+        public double GetDamage()
         {
-            return int.Parse((Strength * Aggression / 100).ToString());
+            return Strength * Aggression / (Agility * 10);
         }
 
 
