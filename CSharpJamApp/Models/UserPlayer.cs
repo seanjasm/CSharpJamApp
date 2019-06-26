@@ -99,7 +99,10 @@ namespace CSharpJamApp.Models
 
         private int GetRandomProbability(int min, int max)
         {
-            return new Random().Next(min, max) + 1;
+            int tempMin = min > max ? min : max;
+            int tempMax = max < min ? min : max;
+
+            return new Random().Next(tempMin, tempMax) + 1;
         }
 
         public double Attack(UserPlayer player)

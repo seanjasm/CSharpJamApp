@@ -38,7 +38,7 @@
         
         <div class="col-md-3">
              
-             @foreach(CSharpJamApp.Models.UserPlayer player in (List< CSharpJamApp.Models.UserPlayer>)@TempData["Monstars"])
+             @foreach(CSharpJamApp.Models.UserPlayer player in (List<CSharpJamApp.Models.UserPlayer>)@TempData["Monstars"])
              {
                  string name = player.Name + ".gif";
                  <div class="playercard col-md-3">

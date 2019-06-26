@@ -49,17 +49,21 @@ namespace CSharpJamApp.Controllers
 
             List<UserPlayer> myTeam = (List<UserPlayer>)TempData["MyTeam"];
 
-            if(myTeam.Count < 5)
+            if (myTeam.Count < 5)
             {
                 string noun = (5 - myTeam.Count) > 1 ? "players" : "player";
                 TempData["Message"] = $"You need {5 - myTeam.Count} more {noun} before you battle the Monstars";
                 return View("Battle");
             }
 
+            var match = Arena();
+
+            ViewBag.Message = match.Item2;
+
             return View();
         }
 
-        public void Arena()
+        public Tuple<bool, string> Arena()
         {
             AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
 
@@ -97,6 +101,30 @@ namespace CSharpJamApp.Controllers
                 }
 
             }
+            string message = "";
+
+            if (myTeam.Count >= 1)
+            {
+                return Tuple.Create(true, "Congrats, you've won!");
+            }
+            else if (monstars.Count == 1)
+            {
+                message = "You were close!";
+            }
+            else if (monstars.Count == 2)
+            {
+                message = "You almost had it!";
+            }
+            else if (monstars.Count >= 4)
+            {
+                message = "You were destroyed!";
+            }
+            else
+            {
+                message = "Better luck next!";
+            }
+
+            return Tuple.Create(false, message);
         }
 
         private void RemoveDownedPlayer(List<UserPlayer> team, List<UserPlayer> downList, int index)
