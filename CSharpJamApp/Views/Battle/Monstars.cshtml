@@ -24,28 +24,27 @@
                 <th></th>
             </tr>
 
-            @{ int i = 0; }
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <img src="~/MonstarImages/@(i).gif" style="width: auto; height: 150px;" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rating)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Height)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Weight)
-                    </td>
-                </tr>
-
-                i++;
+            string name = item.Name + ".gif";
+            <tr>
+                <td>
+                    <img src="~/MonstarImages/@name" style="width: auto; height: 150px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+            </tr>
+               
             }
         </table>
     </div>

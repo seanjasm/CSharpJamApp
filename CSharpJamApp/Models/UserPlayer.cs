@@ -16,7 +16,8 @@ namespace CSharpJamApp.Models
         }
 
         public UserPlayer(Player player)
-        {
+        {           
+
             Injured = false;
             Health = 100;
             this.Id = player.Id;
@@ -35,6 +36,11 @@ namespace CSharpJamApp.Models
             this.Description = player.Description;
             this.PictureUrl = player.PictureUrl;
             this.Team = player.Team;
+        }
+
+        public double GetBMI(double height, double weight)
+        {
+            return weight * 703 / (height * height);
         }
 
         public UserPlayer(JObject player)

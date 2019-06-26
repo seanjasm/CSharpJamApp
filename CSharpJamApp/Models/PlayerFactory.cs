@@ -16,7 +16,6 @@ namespace CSharpJamApp.Models
                 userPlayer.Skill = 98;
                 userPlayer.Strength = 70;
                 userPlayer.TeamWork = 88;
-
                 userPlayer.Endurance = 89;
                 userPlayer.Agility = 80;
             }
@@ -27,8 +26,6 @@ namespace CSharpJamApp.Models
                 userPlayer.Skill = 45;
                 userPlayer.Strength = 55;
                 userPlayer.TeamWork = 25;
-
-
                 userPlayer.Endurance = 72;
                 userPlayer.Agility = 80;
             }
@@ -39,8 +36,6 @@ namespace CSharpJamApp.Models
                 userPlayer.Skill = 45;
                 userPlayer.Strength = 40;
                 userPlayer.TeamWork = 25;
-
-
                 userPlayer.Endurance = 69;
                 userPlayer.Agility = 70;
             }
@@ -49,6 +44,7 @@ namespace CSharpJamApp.Models
             return userPlayer;
         }
     }
+
 
     public enum PlayerType
     {

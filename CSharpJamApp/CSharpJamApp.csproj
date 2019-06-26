@@ -326,13 +326,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\AddTeam.cshtml" />
-    <Content Include="Views\Home\Battle.cshtml" />
+    <Content Include="Views\Battle\Battle.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\FindPlayer.cshtml" />
     <Content Include="Views\Home\FindPlayersByTeam.cshtml" />
     <Content Include="Views\Home\FindTeam.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Monstars.cshtml" />
+    <Content Include="Views\Battle\Monstars.cshtml" />
     <Content Include="Views\Home\TeamManagement.cshtml" />
     <Content Include="Views\Home\Monstars.cshtml" />
   </ItemGroup>
@@ -340,7 +340,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\Battle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
