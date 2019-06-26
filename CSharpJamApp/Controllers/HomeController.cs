@@ -33,6 +33,7 @@ namespace CSharpJamApp.Controllers
                     if (!CSharpDbDAL.AddTeam(currentUserTeam))
                     {
                         Console.WriteLine("Failed to add team");
+
                     }
                 }
             }

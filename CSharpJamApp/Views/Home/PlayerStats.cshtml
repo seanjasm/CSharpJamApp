@@ -13,6 +13,7 @@
 
         .slidecontainer {
             width: 100%;
+            
         }
 
         .slider {
@@ -22,8 +23,7 @@
             border-radius: 5px;
             background: #d3d3d3;
             outline: none;
-            opacity: 0.7;
-            -webkit-transition: .2s;
+           -webkit-transition: .2s;
             transition: opacity .2s;
         }
 
@@ -53,12 +53,83 @@
 @{
     ViewBag.Title = "PlayerStats";
 }
+<<<<<<< HEAD
+@if (Model != null)
+{
+<div class="container-fluid" style="background-image: url('@Model.PictureUrl')">   
+    <h2 id="message"> @ViewBag.Message</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="col-md-6">
+            <img src="@Model.PictureUrl" />
+        </div>
+
+        <div class="form-horizontal col-md-6">
+            <h4>@Model.Name</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PictureUrl)
+            @Html.HiddenFor(model => model.TeamId)
+            @Html.HiddenFor(model => model.Height)
+            @Html.HiddenFor(model => model.Weight)
+            @Html.HiddenFor(model => model.Rating)
+            @Html.HiddenFor(model => model.Description)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Agility, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="slidecontainer">
+                        
+                        <input type="range" min="1" max="100" name="Agility" value="@Model.Agility" class="slider" id="r-Agility">
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Agility, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+=======
+>>>>>>> 8ec134faf82ef2bc79fc0db98c4d96a1c899f0a6
 
     <body style="background-color:blanchedalmond;background-image: url('@Model.PictureUrl');
           background-repeat: no-repeat;background-size: cover;" >
         @if (Model != null)
         {
 
+<<<<<<< HEAD
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endurance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="slidecontainer">
+                        
+                        <input type="range" min="1" max="100" name="Endurance" value="@Model.Endurance" class="slider" id="r-Endurance">
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Endurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aggression, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="slidecontainer">
+                        
+                        <input type="range" min="1" max="100" name="Aggression" value="@Model.Aggression" class="slider" id="r-Aggression">
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Aggression, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Humor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="slidecontainer">
+                       
+                        <input type="range" min="1" max="100" name="Humor" value="@Model.Humor" class="slider" id="r-Humor">
+=======
             <div class="container-fluid">
                 <h2 id="message"> @ViewBag.Message</h2>
 
@@ -69,8 +140,17 @@
 
                     <div class="col-md-6">
                         <img src="@Model.PictureUrl" />
+>>>>>>> 8ec134faf82ef2bc79fc0db98c4d96a1c899f0a6
                     </div>
 
+<<<<<<< HEAD
+            <div class="form-group">
+                @Html.LabelFor(model => model.TeamWork, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="slidecontainer">
+                       
+                        <input type="range" min="1" max="100" name="TeamWork" value="@Model.TeamWork" class="slider" id="r-TeamWork">
+=======
                     <div class="form-horizontal col-md-6">
                         <h4>@Model.Name</h4>
                         <hr />
@@ -149,6 +229,7 @@
                                 <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>
+>>>>>>> 8ec134faf82ef2bc79fc0db98c4d96a1c899f0a6
                     </div>
                 }
             </div>
