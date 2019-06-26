@@ -11,7 +11,6 @@ namespace CSharpJamApp.Controllers
     public class HomeController : Controller
     {
         public static csharpjamDBEntities ORM = new csharpjamDBEntities();
-        private const string MONSTAR_OWNER_ID = "5b450305-83f7-4153-a08f-5dca9264555e";
 
         public ActionResult Index()
         {
@@ -142,7 +141,9 @@ namespace CSharpJamApp.Controllers
         [Authorize]
         public ActionResult RemovePlayer(string playerId)
         {
-            Player player = CSharpDbDAL.GetPlayer(playerId);
+
+            Player player = CSharpDbDAL.GetPlayer(playerId, 
+                CSharpDbDAL.GetContextUser(User.Identity.Name).Id);
 
             if (player != null)
             {
@@ -247,48 +248,7 @@ namespace CSharpJamApp.Controllers
 
         //need to fix things here
 
-        public ActionResult Monstars()
-        {
-            Team team = CSharpDbDAL.GetTeam(MONSTAR_OWNER_ID);
-            List<Player> players = team.Players.ToList();
-
-            return View(players);
-        }
-
-        public ActionResult Battle()
-        {
-            object result = TempData["result"];
-            TempData.Remove("result");
-
-            return View(result);
-        }
-
-        public ActionResult Simulate()
-        {
-            Team monstars = CSharpDbDAL.GetTeam(MONSTAR_OWNER_ID);
-            AspNetUser currentUser = ORM.AspNetUsers.Single(user => user.Email == User.Identity.Name);
-            Team current = CSharpDbDAL.GetTeam(currentUser.Id);
-
-            double monstarsSum = monstars.Players.Sum(player => player.Rating);
-            double currentSum = current.Players.Sum(player => player.Rating);
-            string result;
-
-            if (currentSum > monstarsSum)
-            {
-                result = "You won!";
-            }
-            else if (currentSum < monstarsSum)
-            {
-                result = "You lost!";
-            }
-            else
-            {
-                result = "You tied...";
-            }
-
-            TempData["result"] = new BattleResult(result);
-            return RedirectToAction("Battle");
-        }
+        
     }
 }
 
