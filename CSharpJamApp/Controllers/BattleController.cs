@@ -27,37 +27,36 @@ namespace CSharpJamApp.Controllers
 
         public ActionResult Battle()
         {
-            ViewBag.Monstars = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
+            TempData["Message"] = "";
+            TempData["Monstars"] = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
             AspNetUser user = CSharpDbDAL.GetContextUser(User.Identity.Name);
-            ViewBag.MyTeam = CSharpDbDAL.GetTeamAsUserPlayer(user.Id);
+            TempData["MyTeam"] = CSharpDbDAL.GetTeamAsUserPlayer(user.Id);
             return View();
         }
 
         public ActionResult Simulate()
         {
-            Team monstars = CSharpDbDAL.GetTeam(MONSTAR_OWNER_ID);
-            AspNetUser currentUser = CSharpDbDAL.GetContextUser(User.Identity.Name);
-            Team current = CSharpDbDAL.GetTeam(currentUser.Id);
-
-            double monstarsSum = monstars.Players.Sum(player => player.Rating);
-            double currentSum = current.Players.Sum(player => player.Rating);
-            string result;
-
-            if (currentSum > monstarsSum)
+            if (TempData["Monstars"] is null)
             {
-                result = "You won!";
-            }
-            else if (currentSum < monstarsSum)
-            {
-                result = "You lost!";
-            }
-            else
-            {
-                result = "You tied...";
+                TempData["Monstars"] = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
             }
 
-            //TempData["result"] = new BattleResult(result);
-            return RedirectToAction("Battle");
+            if (TempData["MyTeam"] is null)
+            {
+                AspNetUser user = CSharpDbDAL.GetContextUser(User.Identity.Name);
+                TempData["MyTeam"] = CSharpDbDAL.GetTeamAsUserPlayer(user.Id);
+            }
+
+            List<UserPlayer> myTeam = (List<UserPlayer>)TempData["MyTeam"];
+
+            if(myTeam.Count < 5)
+            {
+                string noun = (5 - myTeam.Count) > 1 ? "players" : "player";
+                TempData["Message"] = $"You need {5 - myTeam.Count} more {noun} before you battle the Monstars";
+                return View("Battle");
+            }
+
+            return View();
         }
 
         public void Arena()
