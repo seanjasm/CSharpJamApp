@@ -164,7 +164,11 @@ namespace CSharpJamApp.Controllers
 
                 foreach (JObject player in playerData["player"])
                 {
-                    players.Add(new UserPlayer(player));
+                    UserPlayer userPlayer = new UserPlayer(player);
+                    if (userPlayer.Rating > 0 || userPlayer.Height > 0 || userPlayer.Weight > 0)
+                    {
+                        players.Add(userPlayer);
+                    }
                 }
                 return View(players);
             }

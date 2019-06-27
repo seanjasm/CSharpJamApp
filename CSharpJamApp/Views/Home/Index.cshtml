@@ -1,17 +1,32 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+    #intro
+    {
+        background-color: black;
+        opacity: 0.4;
+    }
+
+    #intro > p {
+        background-color: black;
+        fill-opacity: 0.5;
+    }
+
+</style>
 
 
+<body class="homepage-header-background" style="background-image:url('/MonstarImages/MonstarsCover.jpg');">
 
-<body class="homepage-header-background" style="background-image:url('/MonstarImages/MonstarsCover.jpg')">
-
-    <div style="color:violet; font-size:16px" >
+    <div style="color:violet; font-size:16px" id="intro" >
+        <p style="opacity">
             On 6/13/2019 we intercepted an alien signal from deep space that the Monstars would arrive on 6/28/2019 to conquer the Earth.
             As the proud earthlings that we are, we have assembled our planet's finest athletes to battle the Monstars on Doom's Day.
             Chose your best 5 athletes to go to battle against the Monstars!
             The fate of Human Existence is in your hands User!
             Good luck!
+
+        </p> 
     </div>
 
 

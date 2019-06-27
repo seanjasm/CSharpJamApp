@@ -1,9 +1,20 @@
 ﻿@model CSharpJamApp.Models.Team
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<style>
+    div.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 50px;
+        padding: 5px;
+        background-color: #969556;
+        border: 2px solid #4CAF50;
+    }
+</style>
+
 
 <h2>@ViewBag.Title</h2>
-<body style="background-color:blanchedalmond">
-    <div class="container-fluid">
+<body style="background-color:blanchedalmond;top:50px;">
+    <div class="container-fluid sticky">
         <div id="searchBar" class="col-md-4">
             <form action="../Home/FindPlayer" method="post">
                 <label for="Name">Name</label><br />
@@ -93,47 +104,47 @@
         }
     </div>
 </body>
-            <script>
-                $(document).ready(() => {
+<script>
+    $(document).ready(() => {
 
-                    $("").click(function () {
-                        $.ajax({
-                            type: 'POST',
-                            contentType: "application/json; charset=utf-8",
-                            url: '../Home/FindTeam',
-                            data: "{'teamName':'" + $('#txtTeam').val() + "'}",
-                            async: false,
-                            success: function (data) {
-                                alert(data.d[0]);
-                                DisplayTeam(data.d[0]);
-                            },
-                            error: function () {
-                                console.log('there is some error');
-                            }
-                        });
+        $("").click(function () {
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                url: '../Home/FindTeam',
+                data: "{'teamName':'" + $('#txtTeam').val() + "'}",
+                async: false,
+                success: function (data) {
+                    alert(data.d[0]);
+                    DisplayTeam(data.d[0]);
+                },
+                error: function () {
+                    console.log('there is some error');
+                }
+            });
 
-                    });
-
-
-                    function DisplayTeam(teams) {
-                        $("#result").html(teams);
-
-                        for (var i in teams) {
-                            alert(teams[i]);
-                        }
-
-                        /*
-                        $(teams).each(function (team) {
-                            $("#result").append(
-                                "<div> <h3>" + team.Name + "</h3>" +
-                                team.description + "<input type='button' value='Get Players'></div>"
-                            ); */
-                        // });
-                    }
-
-                });
-            </script>
-  
+        });
 
 
-   
+        function DisplayTeam(teams) {
+            $("#result").html(teams);
+
+            for (var i in teams) {
+                alert(teams[i]);
+            }
+
+            /*
+            $(teams).each(function (team) {
+                $("#result").append(
+                    "<div> <h3>" + team.Name + "</h3>" +
+                    team.description + "<input type='button' value='Get Players'></div>"
+                ); */
+            // });
+        }
+
+    });
+</script>
+
+
+
+

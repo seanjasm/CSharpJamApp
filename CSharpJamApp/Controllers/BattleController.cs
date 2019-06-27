@@ -34,7 +34,7 @@ namespace CSharpJamApp.Controllers
             return View();
         }
 
-        public ActionResult Simulate()
+        public ActionResult Simulate(string mode="easy")
         {
             if (TempData["Monstars"] is null)
             {
@@ -121,7 +121,7 @@ namespace CSharpJamApp.Controllers
             }
             else
             {
-                message = "Better luck next!";
+                message = "Better luck next time!";
             }
 
             return Tuple.Create(false, message);
