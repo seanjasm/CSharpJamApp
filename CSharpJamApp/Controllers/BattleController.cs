@@ -7,6 +7,7 @@ using CSharpJamApp.Models;
 
 namespace CSharpJamApp.Controllers
 {
+    [Authorize]
     public class BattleController : Controller
     {
 
