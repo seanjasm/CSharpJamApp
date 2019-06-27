@@ -18,7 +18,7 @@
     div.sticky {
         position: -webkit-sticky;
         position: sticky;
-        top: 0;
+        top: 50px;
         padding: 5px;
         background-color: #cae8ca;
         border: 2px solid #4CAF50;
@@ -51,9 +51,9 @@
 
         <div class="col-md-6 sticky">
             <p class="text-danger">@TempData["Message"]</p>
-            <form action="../Battle/Simulate" method="post">
-                <input type="submit" value="Battle!" />
-            </form>
+            <a href="../Battle/Simulate?mode=easy" class="jumbotron btn btn-info">Easy</a>
+            <a href="../Battle/Simulate?mode=normal" class="jumbotron btn btn-info">Normal</a>
+            <a href="../Battle/Simulate?mode=hard" class="jumbotron btn btn-info">Hard</a>
         </div>
 
         <div class="col-md-3">
