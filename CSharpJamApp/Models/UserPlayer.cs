@@ -43,6 +43,7 @@ namespace CSharpJamApp.Models
             return weight * 703 / (height * height);
         }
 
+        //Creating a player from the api data
         public UserPlayer(JObject player)
         {
             try
@@ -99,12 +100,14 @@ namespace CSharpJamApp.Models
 
         private int GetRandomProbability(int min, int max)
         {
+            //Ensures min is less than max
             int tempMin = min > max ? min : max;
             int tempMax = max < min ? min : max;
 
             return new Random().Next(tempMin, tempMax) + 1;
         }
 
+        //returns the damage the player will give opponnent
         public double Attack(UserPlayer player)
         {
             double hp = HitProbability(player);
@@ -132,9 +135,6 @@ namespace CSharpJamApp.Models
                 hp *= player.GetPlayerAgility();
                 hp = hp < 75 ? (double)GetRandomProbability(Convert.ToInt32(hp), 100) : hp;
             }
-
-            
-
             return hp;
         }
 

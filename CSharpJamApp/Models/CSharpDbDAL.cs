@@ -87,10 +87,24 @@ namespace CSharpJamApp.Models
 
                 ORM.SaveChanges();
             }
-            //else
-            //{
+        }
 
-            //}
+        public static void UpdateTeamStats(string owner, bool win)
+        {
+            Team originalTeam = ORM.Teams.FirstOrDefault(t => t.OwnerId == owner);
+            if (originalTeam != null)
+            {
+                if (win)
+                {
+                    originalTeam.Win += 1;
+                }
+                else
+                {
+                    originalTeam.Lost += 1;
+                }
+
+                ORM.SaveChanges();
+            }
         }
 
         //public static List<Player> GetAllPlayers()
@@ -106,7 +120,7 @@ namespace CSharpJamApp.Models
             }
             else if(player.Rating > 3)
             {
-                player = SetPlayerAttributes(player, PlayerFactory.GetPlayer(PlayerType.Moderate));
+                player = SetPlayerAttributes(player, PlayerFactory.GetPlayer(PlayerType.Normal));
             }
             else
             {

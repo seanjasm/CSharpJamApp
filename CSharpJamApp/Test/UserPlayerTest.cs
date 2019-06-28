@@ -208,7 +208,7 @@ namespace CSharpJamApp.Test
         [Fact]
         public void ModerateHpPlayerDamage()
         {
-            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Moderate);
+            UserPlayer userPlayer = PlayerFactory.GetPlayer(PlayerType.Normal);
 
 
             double actual = userPlayer.Attack(userPlayer);
