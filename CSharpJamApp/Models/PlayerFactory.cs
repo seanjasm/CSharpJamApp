@@ -24,7 +24,7 @@ namespace CSharpJamApp.Models
                 userPlayer.Aggression = 90;
                 userPlayer.Humor = 50;
                 userPlayer.Skill = 55;
-                userPlayer.Strength = 75;
+                userPlayer.Strength = 85;
                 userPlayer.TeamWork = 80;
                 userPlayer.Endurance = 72;
                 userPlayer.Agility = 80;
