@@ -3,40 +3,40 @@
 namespace CSharpJamApp.Models
 {
     public class PlayerFactory
-    {
+    {        
         public static UserPlayer GetPlayer(PlayerType type)
         {
             UserPlayer userPlayer = new UserPlayer();
 
             if(type == PlayerType.Strong)
             {
-                userPlayer.Aggression = 60;
+                userPlayer.Aggression = 50;
                 userPlayer.Agility = 80;
                 userPlayer.Humor = 50;
                 userPlayer.Skill = 98;
-                userPlayer.Strength = 70;
+                userPlayer.Strength = 90;
                 userPlayer.TeamWork = 88;
                 userPlayer.Endurance = 89;
                 userPlayer.Agility = 80;
             }
-            else if(type == PlayerType.Moderate)
+            else if(type == PlayerType.Normal)
             {
-                userPlayer.Aggression = 80;
-                userPlayer.Humor = 10;
-                userPlayer.Skill = 45;
-                userPlayer.Strength = 55;
-                userPlayer.TeamWork = 25;
+                userPlayer.Aggression = 90;
+                userPlayer.Humor = 50;
+                userPlayer.Skill = 55;
+                userPlayer.Strength = 75;
+                userPlayer.TeamWork = 80;
                 userPlayer.Endurance = 72;
                 userPlayer.Agility = 80;
             }
             else
             {
                 userPlayer.Aggression = 100;
-                userPlayer.Humor = 10;
-                userPlayer.Skill = 45;
-                userPlayer.Strength = 40;
-                userPlayer.TeamWork = 25;
-                userPlayer.Endurance = 69;
+                userPlayer.Humor = 70;
+                userPlayer.Skill = 55;
+                userPlayer.Strength = 60;
+                userPlayer.TeamWork = 84;
+                userPlayer.Endurance = 90;
                 userPlayer.Agility = 70;
             }
 
@@ -50,6 +50,6 @@ namespace CSharpJamApp.Models
     {
         Weak,
         Strong,
-        Moderate
+        Normal
     }
 }

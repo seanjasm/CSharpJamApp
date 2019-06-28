@@ -162,9 +162,12 @@ namespace CSharpJamApp.Controllers
             {
                 List<UserPlayer> players = new List<UserPlayer>();
 
+                //Building the player from api data
                 foreach (JObject player in playerData["player"])
                 {
                     UserPlayer userPlayer = new UserPlayer(player);
+                    
+                    //Exempted players with no data for eiither rating, height or weight
                     if (userPlayer.Rating > 0 || userPlayer.Height > 0 || userPlayer.Weight > 0)
                     {
                         players.Add(userPlayer);
@@ -184,6 +187,7 @@ namespace CSharpJamApp.Controllers
             {
                 List<UserTeam> teams = new List<UserTeam>();
 
+                //Building the team from api data
                 foreach (JObject team in teamData["teams"])
                 {
                     teams.Add(new UserTeam(team));
@@ -200,7 +204,7 @@ namespace CSharpJamApp.Controllers
             return RedirectToAction("TeamManagement");
         }
 
-
+        //Finds all the player on a team and displays the list
         [Authorize]
         public ActionResult FindPlayersByTeam(string teamName)
         {
@@ -230,6 +234,7 @@ namespace CSharpJamApp.Controllers
         public ActionResult AddTeam(Team team)
         {
             team.Draw = team.Lost = team.Win = 0;
+            team.Location = "Earth";
 
             if (Session["CurrentUser"] is null)
             {

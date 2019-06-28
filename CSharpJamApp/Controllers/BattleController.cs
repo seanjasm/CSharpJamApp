@@ -37,14 +37,16 @@ namespace CSharpJamApp.Controllers
 
         public ActionResult Simulate(string mode="easy")
         {
+            AspNetUser user = CSharpDbDAL.GetContextUser(User.Identity.Name);
+
             if (TempData["Monstars"] is null)
             {
-                TempData["Monstars"] = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
+                //Generate monstars based on Easy, Normal, or Hard
+                TempData["Monstars"] = GenerateMonstarByMode(mode);
             }
 
             if (TempData["MyTeam"] is null)
-            {
-                AspNetUser user = CSharpDbDAL.GetContextUser(User.Identity.Name);
+            {                
                 TempData["MyTeam"] = CSharpDbDAL.GetTeamAsUserPlayer(user.Id);
             }
 
@@ -59,9 +61,43 @@ namespace CSharpJamApp.Controllers
 
             var match = Arena();
 
+            CSharpDbDAL.UpdateTeamStats(user.Id, match.Item1);            
+
             ViewBag.Message = match.Item2;
 
             return View();
+        }
+
+        private List<UserPlayer> GenerateMonstarByMode(string mode)
+        {
+            List<UserPlayer> monstars = CSharpDbDAL.GetTeamAsUserPlayer(MONSTAR_OWNER_ID);
+           
+           //Default is database set attributes
+            switch (mode)
+            {
+                case "easy":
+                        SetModeAttributes(monstars, PlayerFactory.GetPlayer(PlayerType.Weak));
+                    break;
+                case "normal":
+                    SetModeAttributes(monstars, PlayerFactory.GetPlayer(PlayerType.Normal));
+                    break;
+            }
+            return monstars;
+        }
+
+        //Assign difficulty attributes to the Monstars
+        private void SetModeAttributes(List<UserPlayer> monstars, UserPlayer modeSpecific)
+        {
+            foreach (UserPlayer original in monstars)
+            {
+                original.Aggression = modeSpecific.Aggression;
+                original.Agility = modeSpecific.Agility;
+                original.Endurance = modeSpecific.Endurance;
+                original.Humor = modeSpecific.Humor;
+                original.Strength = modeSpecific.Strength;
+                original.TeamWork = modeSpecific.TeamWork;
+                original.Skill = modeSpecific.Skill;
+            }            
         }
 
         public Tuple<bool, string> Arena()
@@ -78,6 +114,7 @@ namespace CSharpJamApp.Controllers
 
             while (myTeam.Count >= 1 && monstars.Count >= 1)
             {
+                //Players are picked at random from each team to go against each other
                 int myTeamIndex = new Random().Next(0, myTeam.Count);
                 int monstarIndex = new Random().Next(0, monstars.Count);
 
@@ -87,6 +124,7 @@ namespace CSharpJamApp.Controllers
                     monstars[monstarIndex]
                 };
 
+                //One player from each team goes against each other
                 MatchUp(HeadToHead);
 
                 //If my team player has no health
@@ -102,41 +140,31 @@ namespace CSharpJamApp.Controllers
                 }
 
             }
-            string message = "";
-
+                     
             if (myTeam.Count >= 1)
             {
-                return Tuple.Create(true, "Congrats, you've won!");
-            }
-            else if (monstars.Count == 1)
-            {
-                message = "You were close!";
-            }
-            else if (monstars.Count == 2)
-            {
-                message = "You almost had it!";
-            }
-            else if (monstars.Count >= 4)
-            {
-                message = "You were destroyed!";
-            }
-            else
-            {
-                message = "Better luck next time!";
+                return Tuple.Create(true, $"You won {myTeam.Count}-{monstars.Count}");
             }
 
+            string message = $"The Monstars won {monstars.Count}-{myTeam.Count}";
+
+            //Tuple to return win as bool and a custom message
             return Tuple.Create(false, message);
         }
 
+        //When a player has no health remaining, it is added to downed list and removed from 
+        //Active player list
         private void RemoveDownedPlayer(List<UserPlayer> team, List<UserPlayer> downList, int index)
-        {
+        {            
             downList.Add(team[index]);
             team.RemoveAt(index);
         }
 
-
+        //Used a random to decide which player draws first blood
+        //One player from each team is passed in a list        
         public void MatchUp(List<UserPlayer> players)
         {
+            //The index of the player that draws first blood is decided here
             int whoGoesFirst = new Random().Next(0, 2);
             int whoGoesNext = whoGoesFirst > 0 ? 0 : 1;
             int damage = 0;
@@ -147,7 +175,9 @@ namespace CSharpJamApp.Controllers
 
             players[whoGoesNext].Health -= damage;
 
-            if (players[whoGoesFirst].Health > 0)
+            //Checks if the attecked player has health remaining
+            //If so, then attack player
+            if (players[whoGoesNext].Health > 0)
             {
                 damage = Convert.ToInt32(players[whoGoesNext].Attack(players[whoGoesFirst]));
                 players[whoGoesFirst].Injured = MarkAsInjured(players[whoGoesFirst], damage);
@@ -155,9 +185,13 @@ namespace CSharpJamApp.Controllers
             }
         }
 
+        //Player gets injured if health falls below 50, next damage is greater than 8
+        //and random agility is divisible by 3
         private bool MarkAsInjured(UserPlayer player, int damage)
         {
-            if (player.Health < 50 && damage > 8)
+            if (player.Health < 50 && damage > 8 
+                && new Random(DateTime.Now.Millisecond).Next(0,
+                Convert.ToInt32(player.Agility)) % 3 == 0)
             {
                 return true;
             }
