@@ -119,7 +119,7 @@ namespace CSharpJamApp.Models
         {
             int remainingHealth = 100 - Health;
 
-            double hp = (Agility * Rating * Strength * Math.Log(TeamWork) + Math.Sqrt(Humor) )/ (Agility * Math.Log10(Aggression));
+            double hp = (Agility * Rating * Strength * Math.Log(TeamWork) + Math.Sqrt(Humor) )/ Agility * (Math.Log10(Aggression));
 
             //Using the remaing health as the players energy
             //Enerrgy is used to determine if the player will produce maximum damage
